@@ -1,6 +1,10 @@
 package com.bb.mylistapplication.model;
 
-public class User {
+import android.os.Parcelable;
+
+import java.io.Serializable;
+
+public class User implements Serializable {
     private String name;
     private String picUrl;
     private String description;

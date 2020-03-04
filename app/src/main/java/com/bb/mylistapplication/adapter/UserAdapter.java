@@ -26,9 +26,20 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
 
     private List<User> userList;
 
-    public UserAdapter(List<User> userList) {
+    private UserClickListener userClickListener;
+
+
+    public UserAdapter(List<User> userList, UserClickListener userClickListener) {
         this.userList = userList;
+        this.userClickListener = userClickListener;
     }
+
+    public interface UserClickListener {
+
+        void displayUser(User user);
+
+    }
+
 
     @NonNull
     @Override
@@ -53,7 +64,17 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
                 .load(userList.get(position).getPicUrl())
                 .into(holder.profileImageView);
 
+//      java 8 lambda expressions....->{}
+        holder.itemView.setOnClickListener(view -> {
+            userClickListener.displayUser(userList.get(position));
+        });
+//        for < java 8
+       /* holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
+            }
+        });*/
     }
 
     @Override
